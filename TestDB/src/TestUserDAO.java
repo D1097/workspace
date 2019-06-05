@@ -80,11 +80,17 @@ public void selectByName(String name){
 }
 
 public void selectByPassword(String password){
+
+// 下記の二行でデータベースとの接続を確立する
+
 	DBConnector db=new DBConnector();
 	Connection con=db.getConnection();
 
 	String sql="select * from test_table where password=?";
 	try{
+
+//　PreparedStatement セキュリティ上必要
+
 		PreparedStatement ps=con.prepareStatement(sql);
 		ps.setString(1, password);
 		ResultSet rs=ps.executeQuery();
